@@ -15,7 +15,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public CreateUserResponse createUser(CreateUserRequest createUserRequest) {
+    public CreateUserSuccessResponse createUser(CreateUserRequest createUserRequest) {
         User user = UserMapper.createUserRequestToEntity(createUserRequest);
         User savedUser = userRepository.save(user);
         return UserMapper.userToCreateUserSuccessResponse(savedUser);

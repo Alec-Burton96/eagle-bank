@@ -23,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(consumes = "application/json")
-    public CreateUserResponse createUser(@RequestBody @Valid CreateUserRequest request) {
+    public CreateUserSuccessResponse createUser(@RequestBody @Valid CreateUserRequest request) {
         return userService.createUser(request);
     }
 }

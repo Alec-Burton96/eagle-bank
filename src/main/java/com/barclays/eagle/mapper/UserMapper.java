@@ -15,7 +15,10 @@ public class UserMapper {
 
     public static CreateUserSuccessResponse userToCreateUserSuccessResponse(User user) {
         return new CreateUserSuccessResponse(user.getId(),
-                user,
+                user.getName(),
+                user.getAddress(),
+                user.getPhoneNumber(),
+                user.getEmail(),
                 user.getCreatedTimestamp(),
                 user.getUpdatedTimestamp());
     }
