@@ -650,8 +650,8 @@ paths:
                   token:
                     type: string
                     description: JWT access token
-        '403':
-          description: Unauthorized
+        '400':
+          description: Bad request
 components:
   schemas:
     CreateBankAccountRequest:

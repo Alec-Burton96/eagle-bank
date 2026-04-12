@@ -8,10 +8,8 @@ import com.barclays.eagle.model.user.entity.User;
 import com.barclays.eagle.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public CreateUserSuccessResponse createUser(@RequestBody @Valid CreateUserRequest request) {
         return userService.createUser(request);
     }
