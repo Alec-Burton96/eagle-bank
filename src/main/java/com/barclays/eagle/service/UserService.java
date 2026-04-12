@@ -19,4 +19,10 @@ public class UserService {
         User savedUser = userRepository.save(user);
         return UserMapper.userToCreateUserSuccessResponse(savedUser);
     }
+
+    public CreateUserSuccessResponse fetchUser(String id) throws Exception {
+        Long idValue = UserMapper.extractIdNumberFromId(id);
+        User user = userRepository.findById(idValue).orElseThrow();
+        return UserMapper.userToCreateUserSuccessResponse(user);
+    }
 }

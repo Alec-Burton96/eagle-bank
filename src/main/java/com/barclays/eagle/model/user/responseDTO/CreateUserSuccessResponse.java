@@ -5,7 +5,7 @@ import com.barclays.eagle.model.user.entity.User;
 
 import java.time.LocalDateTime;
 
-public record CreateUserSuccessResponse(Long id,
+public record CreateUserSuccessResponse(String id,
                                         String name,
                                         Address address,
                                         String phoneNumber,
