@@ -3,7 +3,6 @@ package com.barclays.eagle.service;
 import com.barclays.eagle.mapper.UserMapper;
 import com.barclays.eagle.model.user.entity.User;
 import com.barclays.eagle.model.user.requestDTO.CreateUserRequest;
-import com.barclays.eagle.model.user.responseDTO.CreateUserResponse;
 import com.barclays.eagle.model.user.responseDTO.CreateUserSuccessResponse;
 import com.barclays.eagle.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
