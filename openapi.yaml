@@ -5,6 +5,8 @@ info:
   description: |-
     We want you to create a REST API for Eagle Bank which conforms to this OpenAPI specification which allows a user to create, fetch, update and delete a bank account and deposit or withdraw money from the account. These will be stored as transactions against a bank account which be retrieved but not modified or deleted.
 tags:
+  - name: auth
+    description: Authenticate for use of APIs
   - name: account
     description: Manage a bank account
   - name: transaction
@@ -617,6 +619,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+  /v1/auth/login:
+    post:
+      tags:
+        - auth
+      description: Authenticate user and return JWT token
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: JWT token returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT access token
+        '403':
+          description: Unauthorized
 components:
   schemas:
     CreateBankAccountRequest:
