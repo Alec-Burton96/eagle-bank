@@ -9,6 +9,9 @@ import com.barclays.eagle.security.JwtCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class AccountService {
@@ -17,16 +20,31 @@ public class AccountService {
     private final JwtCache jwtCache;
 
     public CreateAccountSuccessResponse createAccount(CreateAccountRequest createAccountRequest) {
+        String userId = lookupUserId();
+        Account account = AccountMapper.createAccountRequestToEntity(createAccountRequest, userId);
+
+        Account createdAccount = accountRepository.save(account);
+
+        return AccountMapper.accountToCreateAccountSuccessResponse(createdAccount);
+    }
+
+    public List<CreateAccountSuccessResponse> fetchAccounts() {
+        String userId = lookupUserId();
+        List<Account> accounts = accountRepository.findAccountsByUserId(userId);
+
+        return accounts
+                .stream()
+                .map(AccountMapper::accountToCreateAccountSuccessResponse)
+                .toList();
+    }
+
+    private String lookupUserId() {
         String authToken = JwtCache.getAuthTokenForRequest();
-        String userId = jwtCache.getJwtCacheEntries()
+        return jwtCache.getJwtCacheEntries()
                 .stream()
                 .filter(entry -> entry.token().equals(authToken))
                 .findFirst()
                 .map(JwtCache.JwtCacheEntry::userId)
                 .orElseThrow();
-        Account account = AccountMapper.createAccountRequestToEntity(createAccountRequest, userId);
-
-        Account createdAccount = accountRepository.save(account);
-        return AccountMapper.accountToCreateAccountSuccessResponse(account);
     }
 }

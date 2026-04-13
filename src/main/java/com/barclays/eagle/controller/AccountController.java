@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "v1/accounts")
 @RequiredArgsConstructor
@@ -22,6 +24,12 @@ public class AccountController
             @Valid
             CreateAccountRequest request) {
         return accountService.createAccount(request);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<CreateAccountSuccessResponse> fetchAccounts() {
+        return accountService.fetchAccounts();
     }
 
 }

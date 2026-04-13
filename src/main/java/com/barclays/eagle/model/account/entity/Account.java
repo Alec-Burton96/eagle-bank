@@ -47,6 +47,7 @@ public class Account {
         this.sortCode = sortCode;
         this.balance = balance;
         this.currency = currency;
+        this.userId = userId;
     }
 
     private double balance;
