@@ -18,11 +18,9 @@ public class Account {
 
     @Id
     @GeneratedValue
-
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
+    // Would be a one-to-many relationship with the user table
     private String userId;
 
     private String name;
