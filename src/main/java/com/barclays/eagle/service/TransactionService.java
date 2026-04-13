@@ -9,6 +9,8 @@ import com.barclays.eagle.security.JwtCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
@@ -23,6 +25,16 @@ public class TransactionService {
         Transaction createTransaction = transactionRepository.save(transaction);
 
         return TransactionMapper.transactionToCreateTransactionSuccessResponse(createTransaction);
+    }
+
+    public List<CreateTransactionSuccessResponse> fetchTransactions(String accountNumber) {
+        String userId = lookupUserId();
+        List<Transaction> transactions = transactionRepository.getTransactionsByAccountNumberAndUserId(accountNumber, userId);
+
+        return transactions
+                .stream()
+                .map(TransactionMapper::transactionToCreateTransactionSuccessResponse)
+                .toList();
     }
 
     private String lookupUserId() {

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "v1/accounts/{accountNumber}/transactions")
 @RequiredArgsConstructor
@@ -22,12 +24,22 @@ public class TransactionController {
     @Validated
     public CreateTransactionSuccessResponse createTransaction(
             @PathVariable
-            @Pattern(regexp = "^01\\d{6}$", message = "Invalid user ID format")
+            @Pattern(regexp = "^01\\d{6}$", message = "Invalid accountNumber format")
             String accountNumber,
             @RequestBody
             @Valid
             CreateTransactionRequest request) {
         return transactionService.createTransaction(request, accountNumber);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    @Validated
+    public List<CreateTransactionSuccessResponse> fetchTransactions(
+            @PathVariable
+            @Pattern(regexp = "^01\\d{6}$", message = "Invalid accountNumber format")
+            String accountNumber) {
+        return transactionService.fetchTransactions(accountNumber);
     }
 
 }
