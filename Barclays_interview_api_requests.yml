@@ -1,0 +1,195 @@
+opencollection: 1.0.0
+info:
+  name: Barclays_interview
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ''
+      port: ''
+      auth:
+        username: ''
+        password: ''
+      bypassProxy: ''
+items:
+  - info:
+      name: Create-user
+      type: http
+      seq: 1
+    http:
+      method: POST
+      url: http://localhost:8080/v1/users
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Test User1",
+            "address": {
+              "line1": "string",
+              "line2": "string",
+              "line3": "string",
+              "town": "string",
+              "country": "string",
+              "postcode": "string"
+            },
+            "phoneNumber": "string",
+            "email": "user@example.com"
+          }
+      auth:
+        type: bearer
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3NjExMDkwNiwiZXhwIjoxNzc2MTEyNzA2fQ.oEcTRrHmNAEZagZ913DTrGuZ93idCMh-nsPl72DqnBM
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: fetch-user
+      type: http
+      seq: 3
+    http:
+      method: GET
+      url: http://localhost:8080/v1/users/usr-1
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: <12123>
+      auth:
+        type: bearer
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3NjEwOTkxOSwiZXhwIjoxNzc2MTExNzE5fQ.AFL4Gwazognd3Gy2E176Osat6Sly5nbTlg0iouYILQU
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: login
+      type: http
+      seq: 2
+    http:
+      method: POST
+      url: http://localhost:8080/v1/login
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "username": "admin",
+            "password": "password"
+          }
+      auth: inherit
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Create-account
+      type: http
+      seq: 4
+    http:
+      method: POST
+      url: http://localhost:8080/v1/accounts
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "name": "Personal Bank Account1",
+            "accountType": "personal"
+          }
+      auth:
+        type: bearer
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3NjExMDkwNiwiZXhwIjoxNzc2MTEyNzA2fQ.oEcTRrHmNAEZagZ913DTrGuZ93idCMh-nsPl72DqnBM
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: fetch-account
+      type: http
+      seq: 5
+    http:
+      method: GET
+      url: http://localhost:8080/v1/accounts
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ''
+      auth:
+        type: bearer
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3NjExMDI4MiwiZXhwIjoxNzc2MTEyMDgyfQ.Wi5Ko_f_aGeFEoCx5nwNru2qrdhf_A3sgo7R75e2d8Q
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: Create-transaction
+      type: http
+      seq: 6
+    http:
+      method: POST
+      url: http://localhost:8080/v1/accounts/01146704/transactions
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "amount": 100.99,
+            "currency": "GBP",
+            "type": "deposit",
+            "reference": "string2"
+          }
+      auth:
+        type: bearer
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3NjExMDkwNiwiZXhwIjoxNzc2MTEyNzA2fQ.oEcTRrHmNAEZagZ913DTrGuZ93idCMh-nsPl72DqnBM
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+  - info:
+      name: fetch-transaction
+      type: http
+      seq: 7
+    http:
+      method: GET
+      url: http://localhost:8080/v1/accounts/01146704/transactions
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: ''
+      auth:
+        type: bearer
+        token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3NjExMDkwNiwiZXhwIjoxNzc2MTEyNzA2fQ.oEcTRrHmNAEZagZ913DTrGuZ93idCMh-nsPl72DqnBM
+    settings:
+      encodeUrl: true
+      timeout: 0
+      followRedirects: true
+      maxRedirects: 5
+bundled: true
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git
+    exportedAt: '2026-04-13T20:14:53.195Z'
+    exportedUsing: Bruno
